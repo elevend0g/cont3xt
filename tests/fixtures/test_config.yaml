@@ -1,0 +1,54 @@
+# Test Configuration for Virtual Context MCP Server
+# Uses in-memory databases and minimal resource usage for testing
+
+context:
+  max_context_tokens: 12000
+  pressure_threshold: 0.8  # 80%
+  relief_target: 0.6       # 60%
+  min_chunk_size: 200
+  max_chunk_size: 3200
+
+database:
+  sqlite:
+    path: ":memory:"  # In-memory SQLite for testing
+    pool_size: 1
+    timeout: 5.0
+  
+  qdrant:
+    url: "http://localhost:6333"
+    collection_name: "test_context_chunks"
+    vector_size: 384
+    distance: "Cosine"
+    timeout: 5.0
+  
+  neo4j:
+    url: "bolt://localhost:7687"
+    user: "neo4j"
+    password: "testpassword"
+    database: "test"
+    timeout: 5.0
+
+processing:
+  entity_extraction:
+    enabled: true
+    confidence_threshold: 0.6
+    max_entities_per_chunk: 20
+    batch_size: 10
+  
+  chunking:
+    strategy: "semantic"
+    overlap_tokens: 50
+    preserve_dialogue: true
+    preserve_paragraphs: true
+  
+  retrieval:
+    semantic_weight: 0.4
+    entity_weight: 0.3
+    temporal_weight: 0.2
+    graph_weight: 0.1
+    max_results: 20
+    similarity_threshold: 0.3
+
+logging:
+  level: "DEBUG"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

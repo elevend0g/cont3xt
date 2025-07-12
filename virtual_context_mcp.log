@@ -1,0 +1,30 @@
+2025-07-12 23:19:27,440 - __main__ - INFO - Initializing databases...
+2025-07-12 23:19:27,440 - asyncio - DEBUG - Using selector: EpollSelector
+2025-07-12 23:19:27,441 - __main__ - INFO - Loaded configuration from: default
+2025-07-12 23:19:27,442 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: 'ContextConfig' object has no attribute 'token_model'
+2025-07-12 23:19:27,442 - __main__ - ERROR - Failed to initialize databases: 'ContextConfig' object has no attribute 'token_model'
+2025-07-12 23:19:27,442 - __main__ - ERROR - Error: 'ContextConfig' object has no attribute 'token_model'
+2025-07-12 23:19:52,940 - __main__ - INFO - Initializing databases...
+2025-07-12 23:19:52,941 - __main__ - INFO - Loaded configuration from: default
+2025-07-12 23:19:52,942 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: Unknown encoding gpt-4.
+Plugins found: ['tiktoken_ext.openai_public']
+tiktoken version: 0.8.0 (are you on latest?)
+2025-07-12 23:19:52,942 - __main__ - ERROR - Failed to initialize databases: Unknown encoding gpt-4.
+Plugins found: ['tiktoken_ext.openai_public']
+tiktoken version: 0.8.0 (are you on latest?)
+2025-07-12 23:19:52,942 - __main__ - ERROR - Error: Unknown encoding gpt-4.
+Plugins found: ['tiktoken_ext.openai_public']
+tiktoken version: 0.8.0 (are you on latest?)
+2025-07-12 23:20:06,113 - __main__ - INFO - Initializing databases...
+2025-07-12 23:20:06,114 - __main__ - INFO - Loaded configuration from: default
+2025-07-12 23:20:07,045 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: 'DatabaseConfig' object has no attribute 'qdrant_collection'
+2025-07-12 23:20:07,046 - __main__ - ERROR - Failed to initialize databases: 'DatabaseConfig' object has no attribute 'qdrant_collection'
+2025-07-12 23:20:07,046 - __main__ - ERROR - Error: 'DatabaseConfig' object has no attribute 'qdrant_collection'
+2025-07-12 23:20:51,908 - __main__ - INFO - Initializing databases...
+2025-07-12 23:20:51,909 - __main__ - INFO - Loaded configuration from: default
+2025-07-12 23:20:52,003 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: VectorStore.__init__() got an unexpected keyword argument 'url'
+2025-07-12 23:20:52,003 - __main__ - ERROR - Failed to initialize databases: VectorStore.__init__() got an unexpected keyword argument 'url'
+2025-07-12 23:20:52,003 - __main__ - ERROR - Error: VectorStore.__init__() got an unexpected keyword argument 'url'
+2025-07-12 23:21:50,147 - __main__ - INFO - Initializing databases...
+2025-07-12 23:21:50,148 - __main__ - INFO - Loaded configuration from: default
+2025-07-12 23:21:50,291 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"

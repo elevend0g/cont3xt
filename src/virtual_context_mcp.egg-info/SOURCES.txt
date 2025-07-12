@@ -1,0 +1,7 @@
+pyproject.toml
+src/virtual_context_mcp/__init__.py
+src/virtual_context_mcp.egg-info/PKG-INFO
+src/virtual_context_mcp.egg-info/SOURCES.txt
+src/virtual_context_mcp.egg-info/dependency_links.txt
+src/virtual_context_mcp.egg-info/requires.txt
+src/virtual_context_mcp.egg-info/top_level.txt

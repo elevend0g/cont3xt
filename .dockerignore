@@ -1,0 +1,56 @@
+# Git and version control
+.git
+.gitignore
+.github
+
+# Python cache and build artifacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+build/
+dist/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation
+docs/
+documentation/
+*.md
+!README.md
+
+# Testing
+tests/
+.pytest_cache/
+
+# Data and logs (mount these as volumes instead)
+data/
+logs/
+*.log
+
+# Implementation and planning docs
+implementation/
+planning/
+
+# Development tools
+.pre-commit-config.yaml
+.editorconfig

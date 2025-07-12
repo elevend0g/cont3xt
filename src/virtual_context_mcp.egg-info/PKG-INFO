@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: virtual-context-mcp
+Version: 0.1.0
+Summary: Virtual infinite context MCP server for AI agents
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: tiktoken>=0.5.0
+Requires-Dist: sentence-transformers>=2.2.0
+Requires-Dist: qdrant-client>=1.7.0
+Requires-Dist: neo4j>=5.15.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: spacy>=3.7.0

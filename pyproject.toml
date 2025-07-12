@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "virtual-context-mcp"
+version = "0.1.0"
+description = "Virtual infinite context MCP server for AI agents"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Virtual Context Team"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "tiktoken>=0.5.0",
+    "sentence-transformers>=2.2.0",
+    "qdrant-client>=1.7.0",
+    "neo4j>=5.15.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "spacy>=3.7.0"
+]
+
+[project.scripts]
+virtual-context-mcp = "virtual_context_mcp.__main__:main"
+
+[project.entry-points."mcp.servers"]
+virtual-context = "virtual_context_mcp.server:VirtualContextMCPServer"
+
+[project.urls]
+"Homepage" = "https://github.com/virtual-context/cont3xt"
+"Bug Reports" = "https://github.com/virtual-context/cont3xt/issues"
+"Source" = "https://github.com/virtual-context/cont3xt"
