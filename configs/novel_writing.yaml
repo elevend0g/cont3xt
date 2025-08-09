@@ -7,10 +7,11 @@ context:
 
 database:
   sqlite_path: "./data/novel_memory.db"
-  qdrant_url: "http://localhost:6333"
-  neo4j_url: "bolt://localhost:7687"
+  # For Docker deployment, use service names; for local development, use localhost
+  qdrant_url: "http://localhost:6333"  # Use "http://localhost:6333" for local development
+  neo4j_url: "bolt://localhost:7687"   # Use "bolt://localhost:7687" for local development
   neo4j_user: "neo4j"
-  neo4j_password: "password"
+  neo4j_password: "storypassword"
 
 model_name: "all-MiniLM-L6-v2"
 debug: true

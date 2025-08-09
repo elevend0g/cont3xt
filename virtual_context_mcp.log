@@ -28,3 +28,103 @@ tiktoken version: 0.8.0 (are you on latest?)
 2025-07-12 23:21:50,147 - __main__ - INFO - Initializing databases...
 2025-07-12 23:21:50,148 - __main__ - INFO - Loaded configuration from: default
 2025-07-12 23:21:50,291 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 14:34:19,391 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 14:34:19,525 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 14:34:19,525 - __main__ - ERROR - Failed to start server: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 14:34:19,525 - virtual_context_mcp.server - INFO - Virtual Context MCP Server shutdown completed
+2025-07-13 14:34:19,525 - __main__ - INFO - Server shutdown complete
+2025-07-13 14:34:19,526 - __main__ - ERROR - Error: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 14:35:19,595 - __main__ - INFO - Initializing databases...
+2025-07-13 14:35:19,596 - __main__ - INFO - Loaded configuration from: default
+2025-07-13 14:35:20,246 - virtual_context_mcp.context_manager - INFO - Initializing ContextManager components...
+2025-07-13 14:35:20,262 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: [Errno -3] Temporary failure in name resolution
+2025-07-13 14:35:20,262 - __main__ - ERROR - Failed to initialize databases: [Errno -3] Temporary failure in name resolution
+2025-07-13 14:35:20,263 - __main__ - ERROR - Error: [Errno -3] Temporary failure in name resolution
+2025-07-13 14:36:23,957 - __main__ - INFO - Initializing databases...
+2025-07-13 14:36:23,958 - __main__ - INFO - Loaded configuration from: default
+2025-07-13 14:36:24,103 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 14:36:24,608 - virtual_context_mcp.context_manager - INFO - Initializing ContextManager components...
+2025-07-13 14:36:24,610 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/story_memory "HTTP/1.1 404 Not Found"
+2025-07-13 14:36:24,715 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/story_memory "HTTP/1.1 200 OK"
+2025-07-13 14:36:25,047 - virtual_context_mcp.memory.graph_store - WARNING - Schema query failed (may already exist): CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme - {code: Neo.ClientError.Statement.SyntaxError} {message: Invalid input ')': expected ":" (line 1, column 56 (offset: 55))
+"CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme"
+                                                        ^}
+2025-07-13 14:36:25,047 - virtual_context_mcp.memory.graph_store - INFO - Neo4j schema initialization completed
+2025-07-13 14:36:25,047 - virtual_context_mcp.context_manager - INFO - ContextManager initialization complete
+2025-07-13 14:36:25,047 - virtual_context_mcp.server - INFO - Virtual Context MCP Server initialized successfully
+2025-07-13 14:36:25,047 - __main__ - INFO - Database initialization completed successfully!
+2025-07-13 14:36:25,047 - __main__ - INFO - Data directory: data
+2025-07-13 14:36:25,047 - __main__ - INFO - SQLite database: Initialized
+2025-07-13 14:36:25,047 - __main__ - INFO - Qdrant collections: Initialized
+2025-07-13 14:36:25,047 - __main__ - INFO - Neo4j schema: Initialized
+2025-07-13 14:36:25,047 - virtual_context_mcp.server - INFO - Virtual Context MCP Server shutdown completed
+2025-07-13 14:36:25,048 - __main__ - INFO - Database initialization complete. Exiting.
+2025-07-13 14:36:34,418 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 14:36:34,565 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 14:36:35,071 - virtual_context_mcp.context_manager - INFO - Initializing ContextManager components...
+2025-07-13 14:36:35,074 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/story_memory "HTTP/1.1 200 OK"
+2025-07-13 14:36:35,126 - virtual_context_mcp.memory.graph_store - WARNING - Schema query failed (may already exist): CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme - {code: Neo.ClientError.Statement.SyntaxError} {message: Invalid input ')': expected ":" (line 1, column 56 (offset: 55))
+"CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme"
+                                                        ^}
+2025-07-13 14:36:35,126 - virtual_context_mcp.memory.graph_store - INFO - Neo4j schema initialization completed
+2025-07-13 14:36:35,126 - virtual_context_mcp.context_manager - INFO - ContextManager initialization complete
+2025-07-13 14:36:35,126 - virtual_context_mcp.server - INFO - Virtual Context MCP Server initialized successfully
+2025-07-13 14:36:35,126 - virtual_context_mcp.server - INFO - MCP server setup completed with all tools and resources
+2025-07-13 14:36:35,126 - __main__ - INFO - Virtual Context MCP Server starting on 0.0.0.0:8000
+2025-07-13 14:36:35,126 - __main__ - INFO - Configuration: default
+2025-07-13 14:36:35,126 - __main__ - INFO - Data directory: ./data
+2025-07-13 14:36:35,126 - __main__ - INFO - MCP Server is ready and listening for connections...
+2025-07-13 14:36:35,126 - __main__ - INFO - Press Ctrl+C to stop the server
+2025-07-13 15:17:42,027 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 15:17:42,166 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 15:17:42,167 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:17:42,167 - __main__ - ERROR - Failed to start server: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:17:42,167 - virtual_context_mcp.server - INFO - Virtual Context MCP Server shutdown completed
+2025-07-13 15:17:42,167 - __main__ - INFO - Server shutdown complete
+2025-07-13 15:17:42,167 - __main__ - ERROR - Error: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:18:46,740 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 15:18:46,888 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 15:18:47,390 - virtual_context_mcp.context_manager - INFO - Initializing ContextManager components...
+2025-07-13 15:18:47,393 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/story_memory "HTTP/1.1 200 OK"
+2025-07-13 15:18:47,412 - virtual_context_mcp.memory.graph_store - WARNING - Schema query failed (may already exist): CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme - {code: Neo.ClientError.Statement.SyntaxError} {message: Invalid input ')': expected ":" (line 1, column 56 (offset: 55))
+"CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme"
+                                                        ^}
+2025-07-13 15:18:47,413 - virtual_context_mcp.memory.graph_store - INFO - Neo4j schema initialization completed
+2025-07-13 15:18:47,413 - virtual_context_mcp.context_manager - INFO - ContextManager initialization complete
+2025-07-13 15:18:47,413 - virtual_context_mcp.server - INFO - Virtual Context MCP Server initialized successfully
+2025-07-13 15:18:47,413 - virtual_context_mcp.server - INFO - MCP server setup completed with all tools and resources
+2025-07-13 15:18:47,413 - __main__ - INFO - Virtual Context MCP Server starting on 0.0.0.0:8000
+2025-07-13 15:18:47,413 - __main__ - INFO - Configuration: default
+2025-07-13 15:18:47,413 - __main__ - INFO - Data directory: ./data
+2025-07-13 15:18:47,413 - __main__ - INFO - MCP Server is ready and listening for connections...
+2025-07-13 15:18:47,413 - __main__ - INFO - Press Ctrl+C to stop the server
+2025-07-13 15:21:23,321 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 15:21:23,454 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 15:21:23,455 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:21:23,455 - __main__ - ERROR - Failed to start server: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:21:23,455 - virtual_context_mcp.server - INFO - Virtual Context MCP Server shutdown completed
+2025-07-13 15:21:23,455 - __main__ - INFO - Server shutdown complete
+2025-07-13 15:21:23,455 - __main__ - ERROR - Error: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:22:53,150 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 15:22:53,283 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 15:22:53,284 - virtual_context_mcp.server - ERROR - Failed to initialize context manager: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:22:53,284 - __main__ - ERROR - Failed to start server: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:22:53,284 - virtual_context_mcp.server - INFO - Virtual Context MCP Server shutdown completed
+2025-07-13 15:22:53,284 - __main__ - INFO - Server shutdown complete
+2025-07-13 15:22:53,284 - __main__ - ERROR - Error: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-07-13 15:23:22,674 - __main__ - INFO - Starting Virtual Context MCP Server...
+2025-07-13 15:23:22,822 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2025-07-13 15:23:23,335 - virtual_context_mcp.context_manager - INFO - Initializing ContextManager components...
+2025-07-13 15:23:23,338 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/story_memory "HTTP/1.1 200 OK"
+2025-07-13 15:23:23,355 - virtual_context_mcp.memory.graph_store - WARNING - Schema query failed (may already exist): CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme - {code: Neo.ClientError.Statement.SyntaxError} {message: Invalid input ')': expected ":" (line 1, column 56 (offset: 55))
+"CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (n) ON (n.confidence) WHERE n:Character OR n:Location OR n:PlotElement OR n:Theme"
+                                                        ^}
+2025-07-13 15:23:23,355 - virtual_context_mcp.memory.graph_store - INFO - Neo4j schema initialization completed
+2025-07-13 15:23:23,355 - virtual_context_mcp.context_manager - INFO - ContextManager initialization complete
+2025-07-13 15:23:23,355 - virtual_context_mcp.server - INFO - Virtual Context MCP Server initialized successfully
+2025-07-13 15:23:23,355 - virtual_context_mcp.server - INFO - MCP server setup completed with all tools and resources
+2025-07-13 15:23:23,355 - __main__ - INFO - Virtual Context MCP Server starting on 0.0.0.0:8000
+2025-07-13 15:23:23,355 - __main__ - INFO - Configuration: default
+2025-07-13 15:23:23,355 - __main__ - INFO - Data directory: ./data
+2025-07-13 15:23:23,355 - __main__ - INFO - MCP Server is ready and listening for connections...
+2025-07-13 15:23:23,355 - __main__ - INFO - Press Ctrl+C to stop the server

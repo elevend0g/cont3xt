@@ -4,6 +4,9 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
+# Ensure unbuffered Python output for real-time logs
+ENV PYTHONUNBUFFERED=1
+
 # Install system dependencies required for building packages
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -18,8 +21,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-# Download spaCy English model
-RUN python -m spacy download en_core_web_sm
 
 # Copy application source code
 COPY src/ /app/src/
@@ -37,12 +38,10 @@ RUN useradd --create-home --shell /bin/bash appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
-# Expose the default MCP server port
-EXPOSE 8000
 
 # Health check to ensure the service is running
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD python -c "import virtual_context_mcp; print('OK')" || exit 1
 
-# Default command to run the MCP server
-CMD ["python", "-m", "virtual_context_mcp.server", "--config", "configs/novel_writing.yaml"]
+# Default command to run the MCP server over stdio
+CMD ["virtual-context-mcp", "--config", "configs/novel_writing.yaml"]

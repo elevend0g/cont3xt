@@ -1,352 +1,350 @@
-# CONT3XT - Virtual Infinite Context MCP Server
+# cont3xt
 
-A sophisticated Virtual Infinite Context MCP (Model Context Protocol) Server designed for creative writing applications. CONT3XT provides seamless context management that allows AI conversations to maintain unlimited narrative memory while optimizing performance and hardware compatibility.
-
-## 🚀 Features
-
-### Core Capabilities
-- **Virtual Infinite Context**: Maintains unlimited conversation history through intelligent memory management
-- **Pressure Relief System**: Automatically manages context size using configurable thresholds (default: 12k tokens)
-- **Multi-Tier Memory Storage**: SQLite archival, Qdrant vector search, and Neo4j knowledge graphs
-- **Story-Aware Processing**: Specialized entity extraction for characters, locations, plot elements, and themes
-- **Real-Time Memory Retrieval**: Multi-factor relevance scoring combining semantic similarity, entity overlap, temporal relevance, and graph connectivity
-
-### MCP Integration
-- **Story-Specific Tools**: Five specialized MCP tools for creative writing workflows
-- **Resource Endpoints**: JSON API access to current context, characters, and memory statistics
-- **Session Management**: Multi-session support with complete isolation
-- **Type-Safe APIs**: Full Pydantic integration for robust operation
-
-### Production Ready
-- **Docker Deployment**: Complete containerization with health monitoring
-- **CLI Interface**: Comprehensive command-line tools for development and production
-- **Configuration Management**: YAML configuration with environment variable overrides
-- **Testing Suite**: Complete integration tests with performance benchmarking
-
-## 📦 Installation
-
-### Requirements
-- Python 3.11+
-- Docker and Docker Compose (for external services)
-- 16GB+ RAM recommended for local LLM testing
-- SSD storage for optimal database performance
-
-### Quick Install
-```bash
-# Clone the repository
-git clone <repository-url>
-cd cont3xt
-
-# Install the package
-pip install -e .
-
-# Verify installation
-virtual-context-mcp --help
-```
-
-### Development Setup
-```bash
-# Install with development dependencies
-pip install -e ".[dev]"
-
-# Download required spaCy model
-python -m spacy download en_core_web_sm
-
-# Install pre-commit hooks (if using)
-pre-commit install
-```
-
-## 🐳 Docker Deployment
-
-### Production Deployment
-```bash
-# Start all services
-docker-compose up -d
-
-# Initialize databases
-docker-compose exec virtual-context virtual-context-mcp --init-db
-
-# View logs
-docker-compose logs -f virtual-context
-```
-
-### Development with Docker
-```bash
-# Start external services only
-docker-compose up -d qdrant neo4j
-
-# Run the server locally
-virtual-context-mcp --config configs/novel_writing.yaml
-```
-
-## 🔧 Configuration
-
-### Basic Configuration
-Create or modify `configs/novel_writing.yaml`:
-
-```yaml
-context:
-  max_tokens: 12000
-  pressure_threshold: 0.8
-  relief_percentage: 0.4
-  chunk_size: 3200
-  token_model: "cl100k_base"
-
-database:
-  sqlite_path: "./data/memory.db"
-  qdrant_url: "http://localhost:6333"
-  qdrant_collection: "story_memory"
-  neo4j_url: "bolt://localhost:7687"
-  neo4j_user: "neo4j"
-  neo4j_password: "password"
-
-model_name: "all-MiniLM-L6-v2"
-debug: false
-```
-
-### Environment Variables
-Override any configuration value using environment variables:
-
-```bash
-export CONTEXT_MAX_TOKENS=16000
-export DATABASE_QDRANT_URL="http://localhost:6333"
-export DATABASE_NEO4J_PASSWORD="your-password"
-export DEBUG=true
-```
-
-## 🖥️ CLI Usage
-
-### Basic Commands
-```bash
-# Start the MCP server
-virtual-context-mcp
-
-# Use custom configuration
-virtual-context-mcp --config path/to/config.yaml
-
-# Initialize databases
-virtual-context-mcp --init-db
-
-# Development mode with debug logging
-virtual-context-mcp --dev
-
-# Custom host and port
-virtual-context-mcp --host 0.0.0.0 --port 8080
-```
-
-### Available Options
-```
---config, -c     Configuration file path
---host           Host to bind server (default: 127.0.0.1)
---port, -p       Port to bind server (default: 8000)
---log-level      Logging level (DEBUG, INFO, WARNING, ERROR)
---data-dir       Data storage directory (default: ./data)
---dev            Development mode with debug logging
---init-db        Initialize databases and exit
-```
-
-## 🔌 MCP Tools
-
-CONT3XT provides five specialized MCP tools for creative writing:
-
-### `continue_story`
-Process user-assistant interactions with automatic context management.
-```json
-{
-  "name": "continue_story",
-  "arguments": {
-    "user_input": "The detective examined the mysterious letter...",
-    "session_id": "novel_chapter_1"
-  }
-}
-```
-
-### `search_story_memory`
-Semantic search through story memories with optional entity filtering.
-```json
-{
-  "name": "search_story_memory",
-  "arguments": {
-    "query": "What did Sarah say about the mansion?",
-    "session_id": "novel_chapter_1",
-    "entity_filter": ["Sarah", "mansion"]
-  }
-}
-```
-
-### `get_character_info`
-Retrieve character details and relationships.
-```json
-{
-  "name": "get_character_info",
-  "arguments": {
-    "character_name": "Detective Morgan",
-    "session_id": "novel_chapter_1"
-  }
-}
-```
-
-### `get_plot_threads`
-Track active plot lines and their resolution status.
-```json
-{
-  "name": "get_plot_threads",
-  "arguments": {
-    "session_id": "novel_chapter_1",
-    "include_resolved": false
-  }
-}
-```
-
-### `get_context_stats`
-Real-time context pressure and memory statistics.
-```json
-{
-  "name": "get_context_stats",
-  "arguments": {
-    "session_id": "novel_chapter_1"
-  }
-}
-```
-
-## 📊 MCP Resources
-
-Access data through resource endpoints:
-
-- `story://current-context` - Active context window information
-- `story://characters` - All characters in current session  
-- `story://memory-stats` - Comprehensive memory usage statistics
-
-## 🧪 Testing
-
-### Run Tests
-```bash
-# Run all tests
-python run_tests.py
-
-# Run with coverage
-python run_tests.py --coverage
-
-# Run specific test suite
-pytest tests/integration/test_full_story_workflow.py -v
-
-# Performance benchmarking
-pytest tests/integration/test_full_story_workflow.py::test_performance_benchmarks -v
-```
-
-### Integration Testing
-The test suite includes:
-- Full story workflow testing with realistic scenarios
-- Performance benchmarking with configurable targets
-- Memory validation and pressure relief testing
-- Character consistency across relief cycles
-- Error recovery and resilience testing
-
-## 🏗️ Architecture
-
-### Core Components
-
-#### Context Manager (`context_manager.py`)
-- Orchestrates conversation flow and pressure monitoring
-- Manages context assembly from memory and current input
-- Triggers pressure relief at configurable thresholds
-
-#### Pressure Relief Valve (`pressure_valve.py`)
-- Handles context overflow through intelligent chunk extraction
-- Maintains optimal attention patterns by keeping context under limits
-- Preserves narrative coherence during relief operations
-
-#### Memory Storage Tiers
-- **SQLite**: Conversation archival and session management
-- **Qdrant**: Vector similarity search for semantic retrieval
-- **Neo4j**: Knowledge graph for entity relationships
-
-#### Story-Aware Processing
-- **Entity Extraction**: Characters, locations, plot elements, themes
-- **Chunking**: Preserves narrative boundaries and dialogue integrity
-- **Relevance Scoring**: Multi-modal scoring for memory retrieval
-
-### Memory Retrieval Algorithm
-The system uses a sophisticated multi-factor scoring system:
-- **40% Semantic Similarity**: Vector embedding cosine similarity
-- **30% Entity Overlap**: Jaccard similarity of entity sets
-- **20% Temporal Relevance**: Exponential decay (24-hour half-life)
-- **10% Graph Connectivity**: Neo4j relationship strength
-
-## 🔄 How It Works
-
-1. **Input Processing**: User input is tokenized and analyzed for entities
-2. **Context Assembly**: Recent context (70%) + relevant memories (30%)
-3. **Pressure Monitoring**: Continuous token count tracking
-4. **Pressure Relief**: When threshold exceeded, remove 40% of context as semantic chunks
-5. **Memory Storage**: Extracted chunks stored across all storage tiers
-6. **Background Processing**: Entity extraction and relationship building happen asynchronously
-
-## 📈 Performance
-
-### Benchmarks
-- **Context Assembly**: <100ms for 12k token windows
-- **Memory Retrieval**: <200ms for semantic search with 1000+ memories
-- **Entity Extraction**: <150ms for 3.2k token chunks
-- **Pressure Relief**: <300ms for full relief cycle
-
-### Scalability
-- Handles 100+ conversation turns without performance degradation
-- Memory storage scales horizontally with external services
-- Configurable limits support different hardware configurations
-
-## 🛠️ Development
-
-### Project Structure
-```
-cont3xt/
-├── src/virtual_context_mcp/     # Main package
-│   ├── context_manager.py       # Core orchestration
-│   ├── pressure_valve.py        # Context relief logic
-│   ├── server.py                # MCP server implementation
-│   ├── config/                  # Configuration management
-│   ├── chunking/                # Tokenization and chunking
-│   ├── memory/                  # Storage implementations
-│   ├── entities/                # Entity extraction
-│   └── retrieval/               # Memory retrieval
-├── tests/                       # Test suite
-├── configs/                     # Configuration files
-├── docker/                      # Docker deployment
-└── data/                        # Data storage
-```
-
-### Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
-
-### Code Style
-- Follow PEP 8 guidelines
-- Use type hints throughout
-- Add docstrings for all public methods
-- Maintain test coverage above 90%
-
-## 📝 License
-
-MIT License - see LICENSE file for details.
-
-## 🤝 Support
-
-- **Issues**: Report bugs and feature requests via GitHub Issues
-- **Documentation**: See `CLAUDE.md` for detailed implementation notes
-- **Development**: Check `implementation/` directory for task-specific documentation
-
-## 🎯 Roadmap
-
-- [ ] Web UI for memory exploration and management
-- [ ] Additional embedding model support (OpenAI, Cohere, etc.)
-- [ ] Advanced entity relationship inference
-- [ ] Multi-language support for international stories
-- [ ] Cloud deployment templates (AWS, GCP, Azure)
-- [ ] Integration with popular writing tools
+Virtual Infinite Context for Agents and LLMs  
+An MCP server that maintains a continuous rolling context window, always surfacing the most relevant memories for the task at hand — while respecting your token budget.
 
 ---
 
-**CONT3XT** - Bringing infinite context to AI-powered creative writing. 🚀✍️
+## Current Status
+
+This repository includes an MVP MCP stdio server suitable for integration with the Cline extension for VS Code. It exposes a minimal, SQLite-only toolset over stdio with zero external services required by default.
+
+- Version: 0.1.1
+- Transport: MCP stdio
+- Default storage: SQLite at ./data/memory.db (configurable; example config uses ./data/novel_memory.db)
+- Optional backends: Qdrant / Neo4j (disabled by default in this MVP)
+- Tools implemented:
+  - memory_upsert
+  - search_memory
+  - context_pack
+  - health_ping
+
+Notes:
+- Tool names use underscores for compatibility with the Python server decorator. Dotted aliases (e.g., context.pack) can be added later.
+- All tools return a standard JSON envelope as text content:
+  {
+    "ok": boolean,
+    "data": {...},
+    "meta": { "duration_ms": number, "backend": "sqlite", "version": "0.1.1" }
+  }
+
+---
+
+## Quickstart
+
+### 1) Install
+
+Requires Python 3.11+
+
+```bash
+git clone https://github.com/elevend0g/cont3xt.git
+cd cont3xt
+pip install -r requirements.txt
+pip install -e .
+```
+
+### 2) Initialize local storage (SQLite)
+
+```bash
+virtual-context-mcp --init-db
+```
+
+This creates ./data/memory.db if it doesn’t exist (or the path specified by config/env).
+
+### 3) Run (stdio transport)
+
+```bash
+virtual-context-mcp
+```
+
+This starts the MCP server over stdio.
+
+---
+
+## Using with MCP Clients
+
+### Cline (VS Code)
+
+Add an MCP server named cont3xt that launches the stdio server:
+
+Example configuration shape (adapt for your Cline settings UI/JSON):
+
+```json
+{
+  "mcpServers": {
+    "cont3xt": {
+      "command": "virtual-context-mcp",
+      "args": ["--config", "configs/novel_writing.yaml"],
+      "env": {
+        "CONTEXT_MAX_TOKENS": "12000",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+```
+
+Notes:
+- Ensure virtual-context-mcp is in PATH (pip install -e . creates the console script).
+- The --config argument is optional; environment variables can override values (see Configuration).
+
+### Claude Desktop
+
+```json
+{
+  "mcpServers": {
+    "cont3xt": {
+      "command": "virtual-context-mcp",
+      "args": ["--config", "configs/novel_writing.yaml"],
+      "env": {
+        "CONTEXT_MAX_TOKENS": "12000",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+```
+
+---
+
+## Tools (MVP)
+
+All tools return a JSON envelope as text content.
+
+Envelope:
+```json
+{
+  "ok": true,
+  "data": { /* tool-specific payload */ },
+  "meta": {
+    "duration_ms": 5.23,
+    "backend": "sqlite",
+    "version": "0.1.1"
+  }
+}
+```
+
+### 1) memory_upsert
+
+Upsert memory for a session from either combined content or a user/assistant pair.
+
+Arguments:
+- session_id: string (required)
+- content: string (optional; direct content)
+- user_input: string (optional; used if content not provided)
+- assistant_response: string (optional; used if content not provided)
+
+Response (example):
+```json
+{
+  "ok": true,
+  "data": {
+    "session_id": "sess-1",
+    "ids": ["b1c...f"],
+    "count": 1
+  },
+  "meta": {
+    "duration_ms": 1.23,
+    "backend": "sqlite",
+    "version": "0.1.1"
+  }
+}
+```
+
+### 2) search_memory
+
+Simple substring search with a recency-biased score over recent SQLite chunks.
+
+Arguments:
+- session_id: string (required)
+- query: string (required)
+- max_results: number (optional, default 10)
+
+Response (example):
+```json
+{
+  "ok": true,
+  "data": {
+    "query": "emerald eyes",
+    "results_count": 2,
+    "results": [
+      {
+        "chunk_id": "b1c...f",
+        "score": 1.7,
+        "timestamp": "2025-08-09T17:30:00.000000",
+        "token_count": 142,
+        "preview": "User: ... Assistant: ..."
+      }
+    ]
+  },
+  "meta": {
+    "duration_ms": 2.45,
+    "backend": "sqlite",
+    "version": "0.1.1"
+  }
+}
+```
+
+### 3) context_pack
+
+Packs a token-budgeted context using recent conversation chunks. Reserves a small buffer and includes the current input if provided.
+
+Arguments:
+- session_id: string (required)
+- current_input: string (optional, default "")
+- budget_tokens: number (optional, defaults to CONTEXT_MAX_TOKENS)
+
+Response (example):
+```json
+{
+  "ok": true,
+  "data": {
+    "pack": {
+      "schema_version": "ctx.v1",
+      "budget_tokens": 12000,
+      "used_tokens": 2834,
+      "sections": [
+        {"role": "user", "title": "Current Input", "content": "..."},
+        {
+          "role": "context",
+          "title": "Conversation (2025-08-09T17:30:00.000000)",
+          "content": "...",
+          "chunk_id": "b1c...f",
+          "token_count": 142
+        }
+      ],
+      "provenance": {
+        "retriever": "recent-only",
+        "stores": {"sqlite": "./data/memory.db"}
+      },
+      "pack_stats": {
+        "num_candidates": 12,
+        "kept": 4,
+        "dropped": 8,
+        "buffer_tokens": 500
+      }
+    },
+    "meta": {
+      "input_tokens": 120,
+      "output_tokens": 2834,
+      "budget": 12000,
+      "sources": ["b1c...f", "a9d...1"]
+    }
+  },
+  "meta": {
+    "duration_ms": 7.89,
+    "backend": "sqlite",
+    "version": "0.1.1"
+  }
+}
+```
+
+Notes:
+- If nothing fits within the budget (after a fixed buffer of 500 tokens), the pack includes: `"reason": "BUDGET_TOO_SMALL"`.
+- Truncation policy: respect budget strictly; sections are assembled most-recent-first, then presented chronologically for readability.
+
+### 4) health_ping
+
+Returns basic status and configuration fingerprint.
+
+Arguments: none
+
+Response (example):
+```json
+{
+  "ok": true,
+  "data": {
+    "server": "cont3xt",
+    "version": "0.1.1",
+    "datetime": "2025-08-09T17:32:00.000000",
+    "config": {
+      "sqlite_path": "./data/memory.db",
+      "max_tokens": 12000,
+      "token_model": "cl100k_base",
+      "optional_backends": {
+        "qdrant": false,
+        "neo4j": false
+      }
+    }
+  },
+  "meta": {
+    "duration_ms": 0.41,
+    "backend": "sqlite",
+    "version": "0.1.1"
+  }
+}
+```
+
+---
+
+## Cline Demo Task (Code Gen Flow)
+
+1) In Cline, run a task like “Improve function X in file Y; add a unit test and make tests pass.”
+2) Cline should:
+   - Call `search_memory(session_id, query="project goals")`
+   - Call `context_pack(session_id, current_input="<file diff request>", budget_tokens=12000)`
+   - Generate plan → apply small diff → run tests
+   - Call `memory_upsert` with `(user_input, assistant_response)` to persist the session outcome
+3) Acceptance:
+   - From a clean clone, `pip install -e .`, launch Cline, and complete a guided code edit PR in one go using the above flow.
+
+---
+
+## Configuration
+
+Defaults are provided in code, optionally loaded from a YAML file (e.g., configs/novel_writing.yaml) and overridden by environment variables.
+
+Environment variable overrides (examples):
+- CONTEXT_MAX_TOKENS (default 12000)
+- CONTEXT_PRESSURE_THRESHOLD (default 0.8)
+- CONTEXT_RELIEF_PERCENTAGE (default 0.4)
+- CONTEXT_CHUNK_SIZE (default 3200)
+- CONTEXT_TOKEN_MODEL (default cl100k_base)
+
+- DATABASE_SQLITE_PATH (default ./data/memory.db)
+- DATABASE_QDRANT_URL
+- DATABASE_QDRANT_COLLECTION
+- DATABASE_NEO4J_URL
+- DATABASE_NEO4J_USER
+- DATABASE_NEO4J_PASSWORD
+
+For the MVP, only SQLite is used. Qdrant / Neo4j are intentionally not required; future versions can enable them via env/config flags.
+
+Truncation policy:
+- A fixed buffer of 500 tokens is reserved.
+- Packing order: include current_input (if provided) and then pack recent conversation chunks until the budget is met.
+- If no sections can be included, the pack includes `"reason": "BUDGET_TOO_SMALL"`.
+
+---
+
+## Development
+
+Entry points:
+- Console script: virtual-context-mcp → virtual_context_mcp.__main__:main
+- MCP server class: virtual_context_mcp.server:VirtualContextMCPServer
+
+Local logs: standard output (set PYTHONUNBUFFERED=1 for real-time logs). SQLite file: ./data/memory.db by default.
+
+Run unit/integration tests as needed (note that legacy story-focused modules may not reflect the MVP surface area).
+
+---
+
+## Security
+
+- MVP runs in a safe default mode: only persists to local SQLite.
+- No filesystem ingestion or external network writes by default.
+
+---
+
+## Roadmap
+
+- Optional Qdrant/Neo4j integration behind env flags with graceful fallback.
+- Aliased/dotted tool names for compatibility (e.g., context.pack).
+- Richer retrieval (hybrid, deduplication), entity/graph memory, and pressure relief policies.
+- DevContainer / Docker image for reproducible environments.
+
+---
+
+## License
+
+MIT © elevend0g

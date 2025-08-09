@@ -1,0 +1,5 @@
+[console_scripts]
+virtual-context-mcp = virtual_context_mcp.__main__:main
+
+[mcp.servers]
+virtual-context = virtual_context_mcp.server:VirtualContextMCPServer

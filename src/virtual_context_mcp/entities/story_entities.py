@@ -99,6 +99,10 @@ class StoryEntityExtractor:
             "themes": {}
         }
     
+    async def initialize(self) -> None:
+        """Initialize the entity extractor (no-op for spaCy)."""
+        pass
+    
     def extract_entities(self, text: str) -> Dict[str, List[StoryEntity]]:
         """Extract all story entities from text."""
         entities = {

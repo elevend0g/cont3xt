@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "cont3xt": {
+      "command": "virtual-context-mcp",
+      "args": ["--config", "configs/novel_writing.yaml"],
+      "env": {
+        "CONTEXT_MAX_TOKENS": "12000",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

@@ -55,8 +55,7 @@ class ContextManager:
         )
         self.relevance_scorer = RelevanceScorer(
             vector_store=self.vector_store,
-            graph_store=self.graph_store,
-            sqlite_store=self.sqlite_store
+            graph_store=self.graph_store
         )
         
         # Session state tracking
@@ -299,3 +298,12 @@ class ContextManager:
         """Store entities in graph store."""
         for entity in entities:
             await self.graph_store.store_entity(entity)
+    
+    async def shutdown(self) -> None:
+        """Clean shutdown of all components."""
+        try:
+            # Close graph store connection
+            if hasattr(self.graph_store, 'close'):
+                await self.graph_store.close()
+        except Exception as e:
+            logger.error(f"Error during shutdown: {e}")

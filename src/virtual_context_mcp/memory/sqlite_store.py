@@ -21,6 +21,10 @@ class SQLiteStore:
         # Ensure directory exists
         Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     
+    async def initialize(self) -> None:
+        """Initialize the storage system."""
+        await self.init_database()
+    
     async def init_database(self) -> None:
         """Create tables if they don't exist."""
         async with self._lock:

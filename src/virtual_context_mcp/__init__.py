@@ -5,36 +5,19 @@ A Model Context Protocol server that provides virtual infinite context
 for conversational AI systems through intelligent context management.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Virtual Context Team"
 __description__ = "Virtual infinite context MCP server for AI agents"
 
-# Core components
-from .context_manager import ContextManager
-from .pressure_valve import PressureReliefValve
-from .config import Config, ContextConfig, DatabaseConfig
-from .chunking import ContextChunk, MemoryEntry, ContextWindow, TokenCounter, BasicChunker
-from .memory import SQLiteStore, VectorStore, GraphStore
-from .entities import StoryEntity, StoryEntityExtractor
-from .retrieval import RelevanceScorer
-from .server import VirtualContextMCPServer
+# Public API (MVP-friendly; avoid importing heavy optional modules)
+try:
+    from .server import VirtualContextMCPServer
+except Exception:
+    VirtualContextMCPServer = None  # type: ignore
 
 __all__ = [
-    "ContextManager",
-    "PressureReliefValve",
-    "Config", 
-    "ContextConfig", 
-    "DatabaseConfig",
-    "ContextChunk", 
-    "MemoryEntry", 
-    "ContextWindow",
-    "TokenCounter", 
-    "BasicChunker",
-    "SQLiteStore",
-    "VectorStore",
-    "GraphStore",
-    "StoryEntity",
-    "StoryEntityExtractor",
-    "RelevanceScorer",
-    "VirtualContextMCPServer"
+    "VirtualContextMCPServer",
+    "__version__",
+    "__author__",
+    "__description__",
 ]

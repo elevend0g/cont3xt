@@ -1,6 +1,1 @@
-chunking
-config
-entities
-memory
-retrieval
 virtual_context_mcp

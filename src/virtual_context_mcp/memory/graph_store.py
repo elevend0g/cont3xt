@@ -53,6 +53,11 @@ class GraphStore:
             if not record or record["test"] != 1:
                 raise RuntimeError("Failed to verify Neo4j connectivity")
     
+    async def initialize(self) -> None:
+        """Initialize the graph store."""
+        await self.connect()
+        await self.init_schema()
+    
     async def init_schema(self) -> None:
         """Create constraints and indexes for optimal performance."""
         if not self._driver:

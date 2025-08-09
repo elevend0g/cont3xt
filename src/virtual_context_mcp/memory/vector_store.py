@@ -34,6 +34,10 @@ class VectorStore:
                     self._model = await asyncio.to_thread(SentenceTransformer, self.model_name)
         return self._model
     
+    async def initialize(self) -> None:
+        """Initialize the vector store."""
+        await self.init_collection()
+    
     async def init_collection(self) -> None:
         """Create collection if it doesn't exist."""
         try:
